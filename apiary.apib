@@ -1,80 +1,262 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://buscacursosplusplus.apiblueprint.org/
 
-# buscacursos++
+# Buscacursos++
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Esta API permite hacer un CRUD de reviews de cursos y profesores que se encuentran en una aplicación RoR.
 
-## Questions Collection [/questions]
 
-### List All Questions [GET]
+## Colección de Reviews [/reviews]
 
-+ Response 200 (application/json)
+### Lista todos los Reviews  [GET]
 
-        [
+Queda pendiente 
++ Request (application/json)
+
++ Response 201 (application/json)
+        
+    
+
+### Crear un nuevo review [POST]
+
+Crea un nuevo review, adjuntando los datos del curso y el usuario en un JSON.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: oauth_token
+            
+    + Body
+
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                "course": {
+                    "name": "Desarrollo de Sofware",
+                    "number": "IIC3143"
+                },
+                "content": "Este curso es el mejor que he tomado este semestre",
+            }
+
++ Response 201 (application/json)
+
+            {
+                "status":"success",
+                "data": [
                     {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1021241234123412341
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
+                        "name": "Desarrollo de Sofware",
+                        "number": "IIC3143",
+                        "created_at": "2018-05-22T21:17:20.132Z",
+                        "updated_at": "2018-05-22T21:17:20.132Z",
+                        "url": "http://localhost:3000/courses/1.json",
+                        "reviews": [ 
+                            {
+                                "id": 2,
+                                "created_at": "2018-05-22T21:23:16.850Z",
+                                "updated_at": "2018-05-22T21:23:16.850Z",
+                                "content": "Este curso es el mejor que he tomado este semestre",
+                                "url": "http://localhost:3000/reviews/2.json",
+                                "author": {
+                                    "first_name": "IGNACIO",
+                                    "last_name": "HERMOSILLA CORNEJO",
+                                    "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                                }
+                            }
+                        ]
+                    }   
                 ]
             }
-        ]
+        
++ Request Edge case (application/json)
+    + Headers
+    
+            Authorization: oauth_token
+            
+    + Body
 
-### Create a New Question [POST]
+            {
+                "course": {
+                    "name": "Desarrollo de Sofware",
+                    "number": "IIC3143"
+                },
+                "content": ""
+            }
+            
++ Response 401 (application/json)
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+            {
+                "status": "fail",
+                "data": {
+                    "message": "Empty Review"
+                }
+            }
+
+
+
+
+## Colección de un curso [/courses/IIC3143]
+
+
+
+
+
+### Lista Reviews curso especifico [GET]
+Enviar datos de un curso y recibir lista de sus reviews
+
++ Request (application/json)
+    + Headers
+
+            Authorization: oauth_token
+        
++ Response 200 (application/json)
+
+
+        {
+            "status":"success",
+            "data": [
+                {
+                "name": "Desarrollo de Sofware",
+                "number": "IIC3143",
+                "created_at": "2018-05-22T21:17:20.132Z",
+                "updated_at": "2018-05-22T21:17:20.132Z",
+                "url": "http://localhost:3000/courses/1.json",
+                "reviews": [ 
+                    {
+                        "id": 1,
+                        "created_at": "2018-05-22T21:23:16.836Z",
+                        "updated_at": "2018-05-22T21:23:16.836Z",
+                        "content": "Excelente review 1",
+                        "url": "http://localhost:3000/reviews/1.json",
+                        "author": {
+                            "first_name": "IGNACIO",
+                            "last_name": "HERMOSILLA CORNEJO",
+                            "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "created_at": "2018-05-22T21:23:16.850Z",
+                        "updated_at": "2018-05-22T21:23:16.850Z",
+                        "content": "Excelente review 2",
+                        "url": "http://localhost:3000/reviews/2.json",
+                        "author": {
+                            "first_name": "IGNACIO",
+                            "last_name": "HERMOSILLA CORNEJO",
+                            "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                        }
+                    }
+                ]
+                }
+            ]
+        }
+
+
+## Review [/review/1]
+
+
+### Actualizar Review [PUT]
+Edita el Texto de una review del mismo usuario
+        
++ Request Edge case (application/json)
+    + Headers
+    
+            Authorization: oauth_token
+            
+    + Body
+
+            {
+                "content": "nuevo contenido para el review"
+            }
+            
++ Response 200 (application/json)
+
+            {
+                "status":"success",
+                "data": [
+                    {
+                        "name": "Desarrollo de Sofware",
+                        "number": "IIC3143",
+                        "created_at": "2018-05-22T21:17:20.132Z",
+                        "updated_at": "2018-05-22T21:17:20.132Z",
+                        "url": "http://localhost:3000/courses/1.json",
+                        "reviews": [ 
+                            {
+                                "id": 2,
+                                "created_at": "2018-05-22T21:23:16.850Z",
+                                "updated_at": "2018-05-22T21:23:16.850Z",
+                                "content": "nuevo contenido para esta review",
+                                "url": "http://localhost:3000/reviews/2.json",
+                                "author": {
+                                    "first_name": "IGNACIO",
+                                    "last_name": "HERMOSILLA CORNEJO",
+                                    "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                                }
+                            }
+                        ]
+                    }   
+                ]
+            }
+
+### Borrar Review [DELETE]
+Elimina una review del mismo usuario
++ Request Edge case (application/json)
+    + Headers
+    
+            Authorization: oauth_token
+            
+        
++ Response 200 (application/json)
+
+        {
+            "status": "success",
+            "data": []
+        }
+        
+        
+## Control Usuarios [/users]
+
+### Sign up nuevo User
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "user": {
+                "mail": "buscacurso@uc.cl",
+                "password": "plusplus"
+            }
         }
 
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
 
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+        {
+            "status": "success",
+            "data": {
+                "token": {
+                    "auth_token": "hd2s09fR32FdS",
+                    "id": 5,
+                    "refresh": "djk17fhd3skf745jdi"
+                },
+                "user": {
+                    "id": 8,
+                    "name": "Busca Cursos"
+                }
             }
+        }
+
++ Request Edge Case (application/json)
+
+        {
+            "user": {
+                "mail": "grupo3@uc.cl",
+                "password": "incorrect password"
+            }
+        }
+
++ Response 401 (application/json; charset=utf-8)
+
+        {
+          "status": "fail",
+          "data": {
+            "message": "Incorrect mail or password"
+          }
+        }
+
+### Log in de User
