@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
   resources :reviews, format: "json"
 
-  get 'courses', to: 'courses#index'
-  get 'courses/:number', to: 'courses#show' 
+  #get 'courses', to: 'courses#index'
+  #get 'courses/:number', to: 'courses#show' 
 
   root to: "home#show"
   

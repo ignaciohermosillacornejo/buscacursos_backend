@@ -45,6 +45,7 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1.json
   def destroy
     @review.destroy
+    render "error/200_ok", status: :ok
   end
 
   private
@@ -58,7 +59,7 @@ class ReviewsController < ApplicationController
     end
 
     def check_user_review
-      render "error/unauthorized", status: :unauthorized unless (@current_user.reviews.include? @review or @current_user.admin?)
+      render "error/401_unauthorized", status: :unauthorized unless (@current_user.reviews.include? @review or @current_user.admin?)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
