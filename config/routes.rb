@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   resources :reviews
 
+  get 'courses', to: 'courses#index'
+  get 'courses/:number', to: 'courses#show' 
+
   root to: "home#show"
   
 end

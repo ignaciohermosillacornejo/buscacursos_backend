@@ -8,12 +8,18 @@
 
 @user = User.first
 
-Review.create(user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 1")
-Review.create(user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 2")
-Review.create(user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 3")
-Review.create(user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 4")
-Review.create(user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 5")
-Review.create(user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 6")
-Review.create(user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 7")
+Course.create(name: "Desarrollo de Software", number: "IIC3143")
+@course = Course.first
+
+Review.create(course: @course, user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 1")
+Review.create(course: @course, user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 2")
+Review.create(course: @course, user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 3")
+Review.create(course: @course, user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 4")
+Review.create(course: @course, user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 5")
+Review.create(course: @course, user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 6")
+Review.create(course: @course, user: @user, published_at: DateTime.now.beginning_of_day, state: 1, content: "Excelente review 7")
+
+
+
 
 
