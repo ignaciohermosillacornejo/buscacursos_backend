@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :courses
+  resources :courses, format: "json"  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'login', to: redirect('/auth/google_oauth2'), as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'home', to: 'home#show'
   get 'me', to: 'me#show', as: 'me' 
 
-  resources :reviews
+  resources :reviews, format: "json"
 
   get 'courses', to: 'courses#index'
   get 'courses/:number', to: 'courses#show' 
