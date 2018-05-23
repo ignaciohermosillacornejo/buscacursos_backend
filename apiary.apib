@@ -40,9 +40,9 @@ Crea un nuevo review, adjuntando los datos del curso y el usuario en un JSON.
 
             {
                 "status":"success",
-                "data": [
+                "data": 
                     {
-                        "name": "Desarrollo de Sofware",
+                        "course": "Desarrollo de Sofware",
                         "number": "IIC3143",
                         "created_at": "2018-05-22T21:17:20.132Z",
                         "updated_at": "2018-05-22T21:17:20.132Z",
@@ -62,7 +62,7 @@ Crea un nuevo review, adjuntando los datos del curso y el usuario en un JSON.
                             }
                         ]
                     }   
-                ]
+                
             }
         
 + Request Edge case (application/json)
@@ -111,7 +111,7 @@ Enviar datos de un curso y recibir lista de sus reviews
 
         {
             "status":"success",
-            "data": [
+            "data": 
                 {
                 "name": "Desarrollo de Sofware",
                 "number": "IIC3143",
@@ -145,7 +145,7 @@ Enviar datos de un curso y recibir lista de sus reviews
                     }
                 ]
                 }
-            ]
+            
         }
 
 
@@ -169,30 +169,29 @@ Edita el Texto de una review del mismo usuario
 + Response 200 (application/json)
 
             {
-                "status":"success",
-                "data": [
-                    {
-                        "name": "Desarrollo de Sofware",
-                        "number": "IIC3143",
-                        "created_at": "2018-05-22T21:17:20.132Z",
-                        "updated_at": "2018-05-22T21:17:20.132Z",
-                        "url": "http://localhost:3000/courses/1.json",
-                        "reviews": [ 
-                            {
-                                "id": 2,
-                                "created_at": "2018-05-22T21:23:16.850Z",
-                                "updated_at": "2018-05-22T21:23:16.850Z",
-                                "content": "nuevo contenido para esta review",
-                                "url": "http://localhost:3000/reviews/2.json",
-                                "author": {
-                                    "first_name": "IGNACIO",
-                                    "last_name": "HERMOSILLA CORNEJO",
-                                    "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
-                                }
+                "status": "succes",
+                "data": {
+                    "id": 1,
+                    "name": "Desarrollo de Software",
+                    "number": "IIC3143",
+                    "created_at": "2018-05-22T21:17:20.132Z",
+                    "updated_at": "2018-05-22T21:17:20.132Z",
+                    "url": "http://localhost:3000/courses/1",
+                    "reviews": [
+                        {
+                            "id": 16,
+                            "created_at": "2018-05-23T07:07:51.719Z",
+                            "updated_at": "2018-05-23T07:07:56.394Z",
+                            "content": "Poner aca el nuevo texto de nuestra review",
+                            "url": "http://localhost:3000/reviews/16",
+                            "author": {
+                                "first_name": "IGNACIO",
+                                "last_name": "HERMOSILLA CORNEJO",
+                                "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
                             }
-                        ]
-                    }   
-                ]
+                        }
+                    ]
+                }
             }
 
 ### Borrar Review [DELETE]
@@ -207,7 +206,9 @@ Elimina una review del mismo usuario
 
         {
             "status": "success",
-            "data": []
+            "data": {
+                "message": "ok"
+            }
         }
         
         
