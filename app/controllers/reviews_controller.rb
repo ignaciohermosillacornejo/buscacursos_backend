@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
-  before_action :set_course, only: [:create]
+  before_action :set_course, only: [:create, :update]
   before_action :check_user_review, only: [:update, :destroy]
   # before_action :current_user
 
@@ -22,22 +22,30 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(course: @course, user: @current_user, published_at: DateTime.now, state: 1, content: review_params[:content])
-
-    if @review.save
-      render :show, status: :created, location: @review
+    if review_params[:content].empty?
+      render "error/422_unprocessable_entity", status: :unprocessable_entity
     else
-      render json: @review.errors, status: :unprocessable_entity
+      @review = Review.new(course: @course, user: @current_user, published_at: DateTime.now, state: 1, content: review_params[:content])
+
+      if @review.save
+        render :show, status: :created, location: @review
+      else
+        render json: @review.errors, status: :unprocessable_entity
+      end
     end
   end
 
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
   def update
-    if @review.update(content: review_params[:content])
-      render :show, status: :ok, location: @review
+    if review_params[:content].empty?
+      render "error/422_unprocessable_entity", status: :unprocessable_entity
     else
-      render json: @review.errors, status: :unprocessable_entity
+      if @review.update(content: review_params[:content])
+        render :show, status: :ok, location: @review
+      else
+        render json: @review.errors, status: :unprocessable_entity
+      end
     end
   end
 
