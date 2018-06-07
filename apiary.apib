@@ -24,7 +24,7 @@ Crea un nuevo review, adjuntando los datos del curso y el usuario en un JSON.
 + Request (application/json)
     + Headers
     
-            Authorization: "SLA9mJkqGnoQuPHWeujqxRzZ"
+            Authorization: oauth_token
             
     + Body
 
@@ -58,7 +58,9 @@ Crea un nuevo review, adjuntando los datos del curso y el usuario en un JSON.
                                     "first_name": "IGNACIO",
                                     "last_name": "HERMOSILLA CORNEJO",
                                     "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
-                                }
+                                },
+                                "like_total" : 0,
+                                "like_authors": []
                             }
                         ]
                     }   
@@ -68,7 +70,7 @@ Crea un nuevo review, adjuntando los datos del curso y el usuario en un JSON.
 + Request Edge case (application/json)
     + Headers
     
-            Authorization: "SLA9mJkqGnoQuPHWeujqxRzZ"
+            Authorization: oauth_token
             
     + Body
 
@@ -92,73 +94,16 @@ Crea un nuevo review, adjuntando los datos del curso y el usuario en un JSON.
 
 
 
-## Colección de un curso [/courses/IIC3143]
-
-
-
-
-
-### Lista Reviews curso especifico [GET]
-Enviar datos de un curso y recibir lista de sus reviews
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: "SLA9mJkqGnoQuPHWeujqxRzZ"
-        
-+ Response 200 (application/json)
-
-
-        {
-            "status":"success",
-            "data": 
-                {
-                "name": "Desarrollo de Sofware",
-                "number": "IIC3143",
-                "created_at": "2018-05-22T21:17:20.132Z",
-                "updated_at": "2018-05-22T21:17:20.132Z",
-                "url": "http://localhost:3000/courses/1.json",
-                "reviews": [ 
-                    {
-                        "id": 1,
-                        "created_at": "2018-05-22T21:23:16.836Z",
-                        "updated_at": "2018-05-22T21:23:16.836Z",
-                        "content": "Excelente review 1",
-                        "url": "http://localhost:3000/reviews/1.json",
-                        "author": {
-                            "first_name": "IGNACIO",
-                            "last_name": "HERMOSILLA CORNEJO",
-                            "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
-                        }
-                    },
-                    {
-                        "id": 2,
-                        "created_at": "2018-05-22T21:23:16.850Z",
-                        "updated_at": "2018-05-22T21:23:16.850Z",
-                        "content": "Excelente review 2",
-                        "url": "http://localhost:3000/reviews/2.json",
-                        "author": {
-                            "first_name": "IGNACIO",
-                            "last_name": "HERMOSILLA CORNEJO",
-                            "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
-                        }
-                    }
-                ]
-                }
-            
-        }
-
-
 ## Review [/review/1]
 
 
 ### Actualizar Review [PUT]
 Edita el Texto de una review del mismo usuario
         
-+ Request Edge case (application/json)
++ Request  (application/json)
     + Headers
     
-            Authorization: "SLA9mJkqGnoQuPHWeujqxRzZ"
+            Authorization: oauth_token
             
     + Body
 
@@ -188,7 +133,9 @@ Edita el Texto de una review del mismo usuario
                                 "first_name": "IGNACIO",
                                 "last_name": "HERMOSILLA CORNEJO",
                                 "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
-                            }
+                            },
+                            "like_total" : 0,
+                            "like_authors": []
                         }
                     ]
                 }
@@ -196,10 +143,10 @@ Edita el Texto de una review del mismo usuario
 
 ### Borrar Review [DELETE]
 Elimina una review del mismo usuario
-+ Request Edge case (application/json)
++ Request  (application/json)
     + Headers
     
-            Authorization: "SLA9mJkqGnoQuPHWeujqxRzZ"
+            Authorization: oauth_token
             
         
 + Response 200 (application/json)
@@ -210,54 +157,109 @@ Elimina una review del mismo usuario
                 "message": "ok"
             }
         }
-        
-        
-## Control Usuarios [/users]
+   
+## Like a review [/review/1/like]
 
-### Sign up nuevo User
-
+### Like a un review [POST]
+Usuario le da un like al review
 + Request (application/json)
-
-        {
-            "user": {
-                "mail": "buscacurso@uc.cl",
-                "password": "plusplus"
-            }
-        }
-
-+ Response 201 (application/json; charset=utf-8)
+    + Headers
+    
+            Authorization: oauth_token
+            
+            
++ Response 200 (application/json)
 
         {
             "status": "success",
             "data": {
-                "token": {
-                    "auth_token": "hd2s09fR32FdS",
-                    "id": 5,
-                    "refresh": "djk17fhd3skf745jdi"
-                },
-                "user": {
-                    "id": 8,
-                    "name": "Busca Cursos"
+                "message": "ok"
+            }
+        }
+            
+
+### Unlike a un review [DELETE]
+Usuario le da un like al review
++ Request (application/json)
+    + Headers
+    
+            Authorization: oauth_token
+
++ Response 200 (application/json)
+
+        {
+            "status": "success",
+            "data": {
+                "message": "ok"
+            }
+        }
+
+
+## Colección de un curso [/courses/IIC3143]
+
+
+
+### Lista Reviews curso especifico [GET]
+Enviar datos de un curso y recibir lista de sus reviews
+
++ Request  (application/json)
+    + Headers
+
+            Authorization: oauth_token
+        
++ Response 200  (application/json)
+
+
+        {
+            "status":"success",
+            "data": 
+                {
+                "name": "Desarrollo de Sofware",
+                "number": "IIC3143",
+                "created_at": "2018-05-22T21:17:20.132Z",
+                "updated_at": "2018-05-22T21:17:20.132Z",
+                "url": "http://localhost:3000/courses/1.json",
+                "reviews": [ 
+                    {
+                        "id": 1,
+                        "created_at": "2018-05-22T21:23:16.836Z",
+                        "updated_at": "2018-05-22T21:23:16.836Z",
+                        "content": "Excelente review 1",
+                        "url": "http://localhost:3000/reviews/1.json",
+                        "author": {
+                            "first_name": "IGNACIO",
+                            "last_name": "HERMOSILLA CORNEJO",
+                            "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                        },
+                        "like_total" : 2,
+                        "like_authors": [
+                            {
+                                "first_name": "MARIO",
+                                "last_name": "CEPEDA GONZALES",
+                                "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                            },
+                            {
+                                "first_name": "MAGADALENA",
+                                "last_name": "HURTADO ECHEÑAQUI",
+                                "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "created_at": "2018-05-22T21:23:16.850Z",
+                        "updated_at": "2018-05-22T21:23:16.850Z",
+                        "content": "Excelente review 2",
+                        "url": "http://localhost:3000/reviews/2.json",
+                        "author": {
+                            "first_name": "IGNACIO",
+                            "last_name": "HERMOSILLA CORNEJO",
+                            "picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+                        },
+                        "like_total" : 0,
+                        "like_authors": []
+                    }
+                ]
                 }
-            }
+            
         }
-
-+ Request Edge Case (application/json)
-
-        {
-            "user": {
-                "mail": "grupo3@uc.cl",
-                "password": "incorrect password"
-            }
-        }
-
-+ Response 401 (application/json; charset=utf-8)
-
-        {
-          "status": "fail",
-          "data": {
-            "message": "Incorrect mail or password"
-          }
-        }
-
-### Log in de User
