@@ -29,10 +29,14 @@ class ReviewsController < ApplicationController
 
   # PATCH(/PUT) /reviews/1 (.json)
   def update
-    if @review.update(content: review_params[:content])
-      render :show, status: :ok, location: @review
+    if review_params[:content].empty?
+      render "error/422_unprocessable_entity", status: :unprocessable_entity
     else
-      render json: @review.errors, status: :unprocessable_entity
+      if @review.update(content: review_params[:content])
+        render :show, status: :ok, location: @review
+      else
+        render json: @review.errors, status: :unprocessable_entity
+      end
     end
   end
 
