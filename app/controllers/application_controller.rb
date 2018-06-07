@@ -8,6 +8,8 @@ class ApplicationController < ActionController::API
         render "error/401_unauthorized", status: :unauthorized unless user_signed_in?
     end
 
+
+
     private
 
         def current_token

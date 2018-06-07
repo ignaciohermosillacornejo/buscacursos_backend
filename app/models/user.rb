@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	has_many :reviews
 	has_secure_token :oauth_token
+	has_many :likes
 	# TODO: validations
 
 	def self.find_or_create_from_auth_hash(auth)
