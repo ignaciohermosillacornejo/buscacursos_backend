@@ -34,10 +34,15 @@ Rails.application.routes.draw do
   #DELETE	/reviews/:id	reviews#destroy
   #POST /reviews/:id/like reviews#like
   #DELETE	/reviews/:id/like reviews#unlike
+  #POST /reviews/:id/report reviews#report
   resources :reviews, format: "json"
   post '/reviews/:id/like', to: 'reviews#like', format: "json"
   delete '/reviews/:id/like', to: 'reviews#unlike', format: "json"
+  post '/reviews/:id/report', to: 'reviews#report', format: "json"
 
+  ## Bot routes ##
 
+  #POST '/new-message', telegram#new_message
+  post '/webhooks/telegram_asdfasdf' => 'telegram#callback', format: "json"
 
 end

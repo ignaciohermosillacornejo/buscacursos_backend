@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :update, :destroy]
+  before_action :optional_authentication, only: [:show]
   before_action :authenticate, only: [:create]
 
   # GET /courses (.json)
@@ -11,7 +12,7 @@ class CoursesController < ApplicationController
   # GET /courses/IIC2133 (.json)
   def show
     #render "status/501_not_implemented", status: :not_implemented
-    @reviews = @course.reviews
+    @reviews = @course.reviews.sort_by {|obj| obj.likes.length}.reverse
   end
 
   # POST /courses

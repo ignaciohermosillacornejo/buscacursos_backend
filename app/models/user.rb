@@ -2,6 +2,7 @@ class User < ApplicationRecord
 	has_many :reviews
 	has_secure_token :oauth_token
 	has_many :likes
+	has_many :reports
 	# TODO: validations
 
 	def self.find_or_create_from_auth_hash(auth)
@@ -16,4 +17,6 @@ class User < ApplicationRecord
 			user.save!
 		end
 	end
+
+
 end

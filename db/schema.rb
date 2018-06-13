@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606202214) do
+ActiveRecord::Schema.define(version: 20180608023454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,21 @@ ActiveRecord::Schema.define(version: 20180606202214) do
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "review_id"
-    t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["review_id"], name: "index_likes_on_review_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "review_id"
+    t.integer "state"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_reports_on_review_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -54,6 +64,8 @@ ActiveRecord::Schema.define(version: 20180606202214) do
     t.string "picture"
     t.boolean "admin", default: false
     t.string "oauth_token"
+    t.integer "faults", default: 0
+    t.boolean "banned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["oauth_token"], name: "index_users_on_oauth_token", unique: true

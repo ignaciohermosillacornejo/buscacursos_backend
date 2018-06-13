@@ -10,6 +10,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.boolean :admin, default: false
       t.string :oauth_token
       t.index  :oauth_token, unique: true
+      t.integer :faults, default: 0
+      t.boolean :banned, default: false
       t.timestamps
     end
   end
