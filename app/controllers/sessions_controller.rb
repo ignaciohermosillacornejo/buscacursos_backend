@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
 		redirect_to(@@extension_url + '?access_token=' + @user.oauth_token)
 	end
 
+
 	# (JSON) In case the user cancels the process, we return a null token to the extension
 	def failure
 		redirect_to(@@extension_url + '?access_token=' + 'failure')

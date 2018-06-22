@@ -22,8 +22,10 @@ Rails.application.routes.draw do
   
   ## Courses routes ##
 
-  #GET	/courses/:id	courses#show
-  resources :courses, format: "json"  
+  #GET /courses/:id	courses#show
+  #GET /courses/:id/section/:section_id
+  resources :courses, format: "json"
+  get 'courses/:id/section/:section_id', to: 'courses#section_classes', format: "json"
 
   ## Reviews routes ##
 

@@ -13,7 +13,7 @@ class User < ApplicationRecord
 			user.last_name = auth.info.last_name
 			user.email = auth.info.email
 			user.picture = auth.info.image
-			user.regenerate_oauth_token
+			user.regenerate_oauth_token unless user.banned
 			user.save!
 		end
 	end

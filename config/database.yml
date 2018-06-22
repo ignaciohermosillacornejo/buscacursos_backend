@@ -54,9 +54,3 @@ test:
   timeout: 5000
 
 
-# As specified in https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-rails
-development:
-  adapter: postgresql
-  host: localhost
-  username: user
-  database: app-dev

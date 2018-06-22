@@ -42,6 +42,7 @@ class TelegramController < ApplicationController
 		    @user.faults += 1
         if (@user.faults > 3)
           @user.banned = true
+          @user.oauth_token = "banned"
         end
 		    @user.save!
         @report.state = 2
