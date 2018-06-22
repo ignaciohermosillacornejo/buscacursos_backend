@@ -64,8 +64,6 @@ ActiveRecord::Schema.define(version: 20180608023454) do
     t.string "picture"
     t.boolean "admin", default: false
     t.string "oauth_token"
-    t.integer "faults", default: 0
-    t.boolean "banned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["oauth_token"], name: "index_users_on_oauth_token", unique: true
