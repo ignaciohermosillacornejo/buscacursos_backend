@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180608023454) do
+ActiveRecord::Schema.define(version: 20180622201352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(version: 20180608023454) do
     t.string "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "section_id"
     t.index ["number"], name: "index_courses_on_number"
+    t.index ["section_id"], name: "index_courses_on_section_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -53,6 +55,32 @@ ActiveRecord::Schema.define(version: 20180608023454) do
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_reviews_on_course_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "room_sections", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "section_id"
+    t.string "activity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_room_sections_on_room_id"
+    t.index ["section_id"], name: "index_room_sections_on_section_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "x_coord"
+    t.integer "y_coord"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.bigint "course_id"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|
