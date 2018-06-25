@@ -19,7 +19,7 @@ class CoursesController < ApplicationController
   def section_classes
     return render "status/404_not_found", status: :not_found unless @section.present?
     @room_sections = RoomSection.where(section: @section)
-    render "courses/rooms" , status: :success
+    render "courses/rooms", status: :ok
   end
 
   # POST /courses
