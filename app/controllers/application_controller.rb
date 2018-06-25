@@ -4,8 +4,8 @@ class ApplicationController < ActionController::API
     #protect_from_forgery unless: -> { request.format.json? }
 
     def authenticate
-        render "status/400_bad_request", status: :bad_request unless authorization_token?
-        render "status/401_unauthorized", status: :unauthorized unless user_signed_in?
+        return render "status/400_bad_request", status: :bad_request unless authorization_token?
+        return render "status/401_unauthorized", status: :unauthorized unless user_signed_in?
     end
 
     def optional_authentication
