@@ -11,9 +11,6 @@ class SessionsController < ApplicationController
 	# (JSON) Upon succesful verification, google calls create wich sends the token to the extension
 	def create
 		@user = User.find_or_create_from_auth_hash(request.env["omniauth.auth"])
-		puts("="*80)
-		puts(@user)
-		puts("="*80)
 		redirect_to(@@extension_url + '?access_token=' + @user.oauth_token)
 	end
 

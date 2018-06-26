@@ -38,9 +38,9 @@ Rails.application.routes.draw do
   #DELETE	/reviews/:id/like reviews#unlike
   #POST /reviews/:id/report reviews#report
   resources :reviews, format: "json"
-  post '/reviews/:id/like', to: 'reviews#like', format: "json"
-  delete '/reviews/:id/like', to: 'reviews#unlike', format: "json"
-  post '/reviews/:id/report', to: 'reviews#report', format: "json"
+  post '/review/:id/like', to: 'reviews#like', format: "json"
+  delete '/review/:id/like', to: 'reviews#unlike', format: "json"
+  post '/review/:id/report', to: 'reviews#report', format: "json"
 
   ## Bot routes ##
 

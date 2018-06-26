@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
   # PATCH(/PUT) /reviews/1 (.json)
   def update
     if @review.update(content: params[:content])
-      render "status/200_ok", status: :ok
+      render 'reviews/update', status: :ok
     else
       render json: @review.errors, status: :unprocessable_entity
     end
